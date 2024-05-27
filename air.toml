@@ -1,0 +1,12 @@
+# Config file for air - https://github.com/cosmtrek/air
+
+[build]
+bin = "main" # Output binary name
+cmd = "go build -o main ." # Build command
+# exclude_dirs = [] # Exclude watching directories/files
+include_ext = ["go", "tpl", "tmpl", "html"] # File extensions to watch
+exclude_ext = ["swp", "log"] # File extensions to ignore
+delay = 1000 # Delay rebuild after file change, unit is milliseconds
+
+[log]
+level = "debug" # Log level, options: debug, info, warn, error, fatal, panic
