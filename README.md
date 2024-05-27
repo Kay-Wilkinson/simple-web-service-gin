@@ -45,3 +45,40 @@ curl http://0.0.0.0:8080/albums \
     --request "POST" \
     --data '{"title": "The Modern Sound of Betty Carter","artist": "Betty Carter","price": 49.99}'
 ```
+
+### Running with Docker
+
+Use the Makefile for this:
+
+```bash
+make up
+
+make down
+```
+
+#### Run tests:
+
+```bash
+make up
+
+# then
+
+docker-compose exec -it app /bin/bash
+
+# then
+
+go test ./tests/...
+```
+
+### CI/CD Pipeline
+[WIP] A Github Actions pipeline has been added to this project. 
+It will be responsible for:
+    1. Building Docker images
+    2. Pushing them to a registry
+    3. Running tests within the container
+    
+
+
+
+
+
