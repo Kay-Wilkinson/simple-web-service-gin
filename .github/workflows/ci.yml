@@ -49,8 +49,17 @@ jobs:
     - name: Push Docker image to GitHub Container Registry
       run: docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/web-service-gin:latest
 
+    - name: Install Dockerize
+      run: |
+        curl -L https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz > dockerize.tar.gz
+        tar -C /usr/local/bin -xzvf dockerize.tar.gz
+        rm dockerize.tar.gz
+
     - name: Run Container
-      run: make up
+      run: make upd
+
+    - name: Start Postgres
+      run: dockerize -wait tcp://localhost:5432 -timeout 60s
 
     - name: Run tests
       run: make test

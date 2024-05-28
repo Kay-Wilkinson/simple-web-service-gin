@@ -1,6 +1,9 @@
 up:
 	docker-compose up --build
 
+upd:
+	docker-compose up --build -d
+
 .PHONY: test
 
 test:
