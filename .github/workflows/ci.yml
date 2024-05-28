@@ -49,9 +49,8 @@ jobs:
     - name: Push Docker image to GitHub Container Registry
       run: docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/web-service-gin:latest
 
+    - name: Run Container
+      run: make up
+
     - name: Run tests
-      run: |
-        docker run --rm --network host ghcr.io/${{ secrets.GHCR_USERNAME }}/web-service-gin:latest sh -c "
-          dockerize -wait tcp://localhost:5432 -timeout 60s &&
-          go test ./tests/...
-        "
+      run: make test
