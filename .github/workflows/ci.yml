@@ -55,11 +55,9 @@ jobs:
         tar -C /usr/local/bin -xzvf dockerize.tar.gz
         rm dockerize.tar.gz
 
-    - name: Run Container
-      run: make upd
-
-    - name: Start Postgres
-      run: dockerize -wait tcp://localhost:5432 -timeout 60s
-
     - name: Run tests
-      run: make test
+      run: |
+        docker run --rm --network host ghcr.io/kay-wilkinson/web-service-gin:latest sh -c "
+          dockerize -wait tcp://localhost:5432 -timeout 60s &&
+          go test ./tests/...
+        "
